@@ -95,7 +95,9 @@ class PettingZooAECWrapper(MultiAgentEnv):
         for key, val in self.base_env.rewards.items():
             rewards[self.base_env.possible_agents.index(key)] = val
 
-        done = all([self.base_env.terminations[x] or self.base_env.truncations[x] for x in self.base_env.possible_agents])
+        # done = all([self.base_env.terminations[x] or self.base_env.truncations[x] for x in self.base_env.possible_agents])
+
+        done = len(list(self.base_env.terminations.keys())) == 0 or len(list(self.base_env.truncations.keys()))
         # print(self.base_env.terminations)
         # done = all(self.base_env.dones.values())
         info = self.base_env.infos[self.base_env.possible_agents[self.ego_ind]]
